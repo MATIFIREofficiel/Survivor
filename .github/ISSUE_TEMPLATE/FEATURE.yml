@@ -18,14 +18,7 @@ body:
       multiple: true
       options:
         - UI
-        - Game Rendering
-        - Game Dev
-        - Game Design
-        - Game Mechanics
-        - Game Economy
-        - Game Story
-        - Game Characters
-        - Game World
+        - UX
         - Other
     validations:
       required: true
