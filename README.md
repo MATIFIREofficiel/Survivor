@@ -11,7 +11,7 @@ The project is a React-native portal mobile application with employees photo gal
 1. Clone the repository to your local machine.
 
 ## Usage
-Launch the application running the following command: `npx expo start`
+Launch the application running the following command inside 'Survivor' folder: `npx expo start`
 
 ## Contributors
 The following individuals have contributed to this project:
