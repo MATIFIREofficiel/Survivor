@@ -54,33 +54,34 @@ export default function LoginPage({ setIsSignedIn, setApiUser })
     return (
         <View style={styles.container}>
             <View style={styles.box}></View>
-                <StatusBar style="auto" />
+            <Text style={styles.title}>LOGIN</Text>
+            <StatusBar style="auto" />
                 <View style={styles.inputView}>
-                    <TextInput
-                    style={styles.TextInput}
-                    placeholder="Email."
-                    placeholderTextColor="#003f5c"
-                    value={email}
-                    onChangeText={setEmail}
-                    />
-                </View>
-                <View style={styles.inputView}>
-                    <TextInput
-                    style={styles.TextInput}
-                    placeholder="Password."
-                    placeholderTextColor="#003f5c"
-                    secureTextEntry={true}
-                    value={password}
-                    onChangeText={setPassword}
-                    />
-                </View>
-                <TouchableOpacity>
-                    <Text style={styles.forgot_button}>Forgot password?</Text>
-                </TouchableOpacity>
-                {errorMessage && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
-                <TouchableOpacity style={styles.login} onPress={handleLoginPress}>
-                    <Text style={styles.loginText}>LOGIN</Text>
-                </TouchableOpacity>
+                <TextInput
+                style={styles.TextInput}
+                placeholder="Email."
+                placeholderTextColor="#003f5c"
+                value={email}
+                onChangeText={setEmail}
+                />
+            </View>
+            <View style={styles.inputView}>
+                <TextInput
+                style={styles.TextInput}
+                placeholder="Password."
+                placeholderTextColor="#003f5c"
+                secureTextEntry={true}
+                value={password}
+                onChangeText={setPassword}
+                />
+            </View>
+            <TouchableOpacity>
+                <Text style={styles.forgot_button}>Forgot password?</Text>
+            </TouchableOpacity>
+            {errorMessage && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
+            <TouchableOpacity style={styles.login} onPress={handleLoginPress}>
+                <Text style={styles.loginText}>LOGIN</Text>
+            </TouchableOpacity>
         </View>
     );
 }
@@ -94,10 +95,16 @@ const styles = StyleSheet.create({
     },
     box: {
         backgroundColor: "white",
-        height: "50%",
+        height: "45%",
         width: "85%",
         borderRadius: 20,
         position: 'absolute',
+    },
+    title: {
+        marginBottom: 10,
+        color: '#6F9EEB',
+        fontSize: 35,
+        fontWeight: 'bold',
     },
     loginLogo: {
         marginBottom: 40,
