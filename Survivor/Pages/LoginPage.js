@@ -35,7 +35,7 @@ function login_request(email, password, { setIsSignedIn, setApiUser, setIsError 
     })
     .catch((error) => {
         setIsError(true);
-        console.error('Erreur lors de la requête à l\'API:', error);
+        console.log(error);
     });
 }
 
