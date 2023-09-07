@@ -1,12 +1,12 @@
+import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import DrawerMenu from './Components/DrawerMenu.js';
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Hello World, you are ready to start to work!</Text>
-      <StatusBar style="auto" />
-    </View>
+      <DrawerMenu />
   );
 }
 
