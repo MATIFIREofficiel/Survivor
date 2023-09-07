@@ -1,6 +1,7 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import TrombinoscopeScreen from './Trombinoscope.js';
+import ProfilePage from './ProfilePage.js';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Button, View, StyleSheet } from 'react-native';
@@ -15,7 +16,7 @@ function NotificationsScreen({ navigation }) {
   );
 }
 
-export default function DrawerMenu({ navigation }) {
+export default function DrawerMenu({ navigation , apiUser} ) {
   return (
     <NavigationContainer styles={style.container}>
       <Drawer.Navigator initialRouteName="trombinoscope">
@@ -36,6 +37,18 @@ export default function DrawerMenu({ navigation }) {
               drawerIcon: ({ focused, size }) => (
                 <Ionicons
                   name="ios-notifications"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Profile" component={ProfilePage}
+          initialParams={apiUser}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="person"
                   size={size}
                   color={focused ? 'blue' : '#ccc'}
                 />

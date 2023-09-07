@@ -5,10 +5,10 @@ import React, { useState } from 'react';
 export default function ConnectionChecker()
 {
     const [isSignedIn, setIsSignedIn] = useState(false);
-    const [ApiUser, setApiUser] = useState("");
+    const [ApiUser, setApiUser] = useState({});
 
     if (isSignedIn) {
-        return (<DrawerMenu/>);
+        return (<DrawerMenu apiUser={ApiUser} />);
     } else {
         return (<LoginPage setIsSignedIn={setIsSignedIn} setApiUser={setApiUser}/>);
     }

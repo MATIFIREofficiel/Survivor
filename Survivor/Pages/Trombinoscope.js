@@ -49,18 +49,9 @@ export default function TrombinoscopeScreen({ navigation}) {
         }
     };
 
-    const handleButtonPress = async () => {
-        handleRefresh();
-    };
     useEffect(() => {
         getListEmployeesID();
     }, []);
-
-    const handleRefresh = () => {
-        setRefreshing(true);
-        console.log("refreshing");
-        setRefreshing(false);
-    };
 
     const renderItem = ({ item }) => {
         return (
@@ -74,16 +65,11 @@ export default function TrombinoscopeScreen({ navigation}) {
     return (
 
         <View style={styles.homePage}>
-            <Button
-                title="test"
-                onPress={handleButtonPress}
-            />
-
             <FlatList
                 refreshing={true}
                 data={infos}
                 renderItem={renderItem}
-                numColumns={2}
+                numColumns={3}
                 extraData={infos}
             />
 
@@ -98,16 +84,16 @@ const styles = StyleSheet.create ({
         alignItems: "center",
     },
     item: {
-        paddingBottom: 10,
         marginVertical: 8,
         marginHorizontal: 16,
-        width: 100,
+        width: 110,
     },
     image: {
+        marginHorizontal: 16,
+        marginTop: 10,
         width: 100,
         height: 100,
         borderRadius: 40,
         overflow:"hidden",
-        padding : 10,
     },
 });
