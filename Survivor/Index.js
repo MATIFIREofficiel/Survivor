@@ -7,8 +7,8 @@ export default function ConnectionChecker()
     const [isSignedIn, setIsSignedIn] = useState(false);
 
     if (isSignedIn) {
-        return (<DrawerMenu/>);
+        return (<DrawerMenu setIsSignedIn={setIsSignedIn}/>);
     } else {
-        return (<LoginPage setIsSignedIn={setIsSignedIn} />);
+        return (<LoginPage setIsSignedIn={setIsSignedIn}/>);
     }
 }
