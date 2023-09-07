@@ -26,8 +26,7 @@ function Item({ item, onPress }) {
 const ids = [];
 
 
-export default function TrombinoscopeScreen({ navigation, route }) {
-    const setIsLogIng = route.params.setIsSignedIn;
+export default function TrombinoscopeScreen({ navigation}) {
     const [refreshing, setRefreshing] = useState(false);
 
     const [infos, setinfos] = useState([]);
@@ -52,7 +51,6 @@ export default function TrombinoscopeScreen({ navigation, route }) {
 
     const handleButtonPress = async () => {
         handleRefresh();
-        setIsLogIng(false);
     };
     useEffect(() => {
         getListEmployeesID();
@@ -63,7 +61,7 @@ export default function TrombinoscopeScreen({ navigation, route }) {
         console.log("refreshing");
         setRefreshing(false);
     };
- 
+
     const renderItem = ({ item }) => {
         return (
             <Item

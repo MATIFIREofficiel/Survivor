@@ -8,7 +8,7 @@ export default function ConnectionChecker()
     const [ApiUser, setApiUser] = useState("");
 
     if (isSignedIn) {
-        return (<DrawerMenu setIsSignedIn={setIsSignedIn}/>);
+        return (<DrawerMenu/>);
     } else {
         return (<LoginPage setIsSignedIn={setIsSignedIn} setApiUser={setApiUser}/>);
     }

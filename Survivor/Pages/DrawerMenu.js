@@ -15,12 +15,11 @@ function NotificationsScreen({ navigation }) {
   );
 }
 
-export default function DrawerMenu({ navigation, setIsSignedIn }) {
+export default function DrawerMenu({ navigation }) {
   return (
     <NavigationContainer styles={style.container}>
       <Drawer.Navigator initialRouteName="trombinoscope">
       <Drawer.Screen name="Trombinoscope" component={TrombinoscopeScreen}
-          initialParams={{setIsSignedIn}}
           options={
             {
               drawerIcon: ({ focused, size }) => (
