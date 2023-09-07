@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
-import DrawerMenu from './Components/DrawerMenu.js';
+import DrawerMenu from './Pages/DrawerMenu.js';
 
 export default function App() {
   return (
