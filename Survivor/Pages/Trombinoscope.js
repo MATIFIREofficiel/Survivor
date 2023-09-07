@@ -1,4 +1,4 @@
-import { View, Text, Button, Image, FlatList } from "react-native";
+import { View, Text, Button, Image, FlatList , StyleSheet} from "react-native";
 import axios from "axios";
 import React, { useState, memo , useEffect} from 'react';
 
@@ -17,12 +17,11 @@ function Item({ item, onPress }) {
                             Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzQsImVtYWlsIjoib2xpdmVyLmxld2lzQG1hc3VyYW8uanAiLCJuYW1lIjoiT2xpdmVyIiwic3VybmFtZSI6Ikxld2lzIiwiZXhwIjoxNjk1NzI2MzMwfQ.kfZoJqTF7H6Wg1egKTyA8W3r-pucZvkmvBAP0v_Fb6k',
                         },
                     }}
-                    style={{ width: 100, height: 100, borderRadius: 40, overflow:"hidden"}} />
+                    style={styles.image} />
                 <Text style={styles.item}> {item.name} {item.surname} </Text>
             </View>
         </>
     );
-
 }
 
 const ids = [];
@@ -86,7 +85,6 @@ export default function TrombinoscopeScreen({ navigation }) {
                 data={infos}
                 renderItem={renderItem}
                 numColumns={2}
-                columnWrapperStyle={{ justifyContent: 'space-around' }}
                 extraData={infos}
             />
 
@@ -94,15 +92,23 @@ export default function TrombinoscopeScreen({ navigation }) {
     )
 }
 
-const styles = {
+const styles = StyleSheet.create ({
     homePage: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
     },
     item: {
-        padding: 20,
+        paddingBottom: 10,
         marginVertical: 8,
         marginHorizontal: 16,
+        width: 100,
     },
-};
+    image: {
+        width: 100,
+        height: 100,
+        borderRadius: 40,
+        overflow:"hidden",
+        padding : 10,
+    },
+});
