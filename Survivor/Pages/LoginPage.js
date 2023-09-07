@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import axios from "axios";
 
-function login_request(email, password, { setIsSignedIn, setApiUser })
+function login_request(email, password, { setIsSignedIn, setApiUser, setIsError })
 {
     const url = 'https://masurao.fr/api/employees/login';
     const headers = {
@@ -30,9 +30,11 @@ function login_request(email, password, { setIsSignedIn, setApiUser })
         if (response.status === 200) {
             setApiUser(response.data);
             setIsSignedIn(true);
+            setIsError(false);
         }
     })
     .catch((error) => {
+        setIsError(true);
         console.error('Erreur lors de la requête à l\'API:', error);
     });
 }
@@ -42,11 +44,12 @@ export default function LoginPage({ setIsSignedIn, setApiUser })
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
+    const [isError, setIsError] = useState(false);
 
     const handleLoginPress = () => {
         console.log("Email:", email);
         console.log("Password:", password);
-        login_request(email, password, {setIsSignedIn, setApiUser});
+        login_request(email, password, {setIsSignedIn, setApiUser, setIsError});
         setEmail("");
         setPassword("");
     };
@@ -78,10 +81,10 @@ export default function LoginPage({ setIsSignedIn, setApiUser })
             <TouchableOpacity>
                 <Text style={styles.forgot_button}>Forgot password?</Text>
             </TouchableOpacity>
-            {errorMessage && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
             <TouchableOpacity style={styles.login} onPress={handleLoginPress}>
                 <Text style={styles.loginText}>LOGIN</Text>
             </TouchableOpacity>
+            {isError ? (<Text style={styles.errorText}>Incorrect username or password</Text>) : null}
         </View>
     );
 }
@@ -105,6 +108,11 @@ const styles = StyleSheet.create({
         color: '#6F9EEB',
         fontSize: 35,
         fontWeight: 'bold',
+    },
+    errorText: {
+        color: 'red',
+        fontSize: 16,
+        marginBottom: 10,
     },
     loginLogo: {
         marginBottom: 40,
@@ -136,6 +144,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 10,
+        marginBottom: 10,
         backgroundColor: "#6F9EEB",
     },
     loginText: {
