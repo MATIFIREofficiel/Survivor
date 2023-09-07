@@ -10,29 +10,45 @@ import {
 } from 'react-native';
 import axios from "axios";
 
-export default function LoginPage({ setIsSignedIn })
+function login_request(email, password, { setIsSignedIn, setApiUser })
+{
+    const url = 'https://masurao.fr/api/employees/login';
+    const headers = {
+        'accept': 'application/json',
+        'X-Group-Authorization': 'AhSyHQjIpPhIvfI5OU8HHe9nyhPKwY-q',
+        'Content-Type': 'application/json',
+    };
+    const data = {
+        email: email,
+        password: password,
+    };
+
+    axios.post(url, data, { headers })
+    .then((response) => {
+        console.log('Réponse de l\'API:', response.data);
+        console.log(response.status);
+        if (response.status === 200) {
+            setApiUser(response.data);
+            setIsSignedIn(true);
+        }
+    })
+    .catch((error) => {
+        console.error('Erreur lors de la requête à l\'API:', error);
+    });
+}
+
+export default function LoginPage({ setIsSignedIn, setApiUser })
 {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
 
-    const url = 'https://masurao.fr/api/employees';
-
-    const headers = {
-        'accept': 'application/json',
-        'X-Group-Authorization': 'AhSyHQjIpPhIvfI5OU8HHe9nyhPKwY-q',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NzQsImVtYWlsIjoib2xpdmVyLmxld2lzQG1hc3VyYW8uanAiLCJuYW1lIjoiT2xpdmVyIiwic3VybmFtZSI6Ikxld2lzIiwiZXhwIjoxNjk1NzI2MzMwfQ.kfZoJqTF7H6Wg1egKTyA8W3r-pucZvkmvBAP0v_Fb6k'
-    };
-
-    axios.get(url, {headers})
-    .then(response => console.log(response.data))
-
     const handleLoginPress = () => {
         console.log("Email:", email);
         console.log("Password:", password);
+        login_request(email, password, {setIsSignedIn, setApiUser});
         setEmail("");
         setPassword("");
-        setIsSignedIn(true);
     };
 
     return (
