@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import axios from "axios";
 
-function login_request(email, password, { setIsSignedIn, setApiUser })
+function login_request(email, password, { setIsSignedIn, setApiUser, setIsError })
 {
     const url = 'https://masurao.fr/api/employees/login';
     const headers = {
@@ -30,10 +30,12 @@ function login_request(email, password, { setIsSignedIn, setApiUser })
         if (response.status === 200) {
             setApiUser(response.data);
             setIsSignedIn(true);
+            setIsError(false);
         }
     })
     .catch((error) => {
-        console.error('Erreur lors de la requête à l\'API:', error);
+        setIsError(true);
+        console.log(error);
     });
 }
 
@@ -42,46 +44,47 @@ export default function LoginPage({ setIsSignedIn, setApiUser })
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
+    const [isError, setIsError] = useState(false);
 
     const handleLoginPress = () => {
         console.log("Email:", email);
         console.log("Password:", password);
-        login_request(email, password, {setIsSignedIn, setApiUser});
+        login_request(email, password, {setIsSignedIn, setApiUser, setIsError});
         setEmail("");
         setPassword("");
     };
 
     return (
         <View style={styles.container}>
-        <View style={styles.rectangle}></View>
-
-        <StatusBar style="auto" />
-        <View style={styles.inputView}>
-            <TextInput
-            style={styles.TextInput}
-            placeholder="Email."
-            placeholderTextColor="#003f5c"
-            value={email}
-            onChangeText={setEmail}
-            />
-        </View>
-        <View style={styles.inputView}>
-            <TextInput
-            style={styles.TextInput}
-            placeholder="Password."
-            placeholderTextColor="#003f5c"
-            secureTextEntry={true}
-            value={password}
-            onChangeText={setPassword}
-            />
-        </View>
-        <TouchableOpacity>
-            <Text style={styles.forgot_button}>Forgot password?</Text>
-        </TouchableOpacity>
-        {errorMessage && <Text style={{ color: 'red' }}>{errorMessage}</Text>}
-        <TouchableOpacity style={styles.login} onPress={handleLoginPress}>
-            <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
+            <View style={styles.box}></View>
+            <Text style={styles.title}>LOGIN</Text>
+            <StatusBar style="auto" />
+                <View style={styles.inputView}>
+                <TextInput
+                style={styles.TextInput}
+                placeholder="Email."
+                placeholderTextColor="#003f5c"
+                value={email}
+                onChangeText={setEmail}
+                />
+            </View>
+            <View style={styles.inputView}>
+                <TextInput
+                style={styles.TextInput}
+                placeholder="Password."
+                placeholderTextColor="#003f5c"
+                secureTextEntry={true}
+                value={password}
+                onChangeText={setPassword}
+                />
+            </View>
+            <TouchableOpacity>
+                <Text style={styles.forgot_button}>Forgot password?</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.login} onPress={handleLoginPress}>
+                <Text style={styles.loginText}>LOGIN</Text>
+            </TouchableOpacity>
+            {isError ? (<Text style={styles.errorText}>Incorrect username or password</Text>) : null}
         </View>
     );
 }
@@ -89,16 +92,36 @@ export default function LoginPage({ setIsSignedIn, setApiUser })
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'gray',
+        backgroundColor: '#f5f5f5',
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    box: {
+        backgroundColor: "white",
+        height: "45%",
+        width: "85%",
+        borderRadius: 20,
+        position: 'absolute',
+    },
+    title: {
+        marginBottom: 10,
+        color: '#6F9EEB',
+        fontSize: 35,
+        fontWeight: 'bold',
+    },
+    errorText: {
+        color: 'red',
+        fontSize: 16,
+        marginBottom: 10,
     },
     loginLogo: {
         marginBottom: 40,
     },
     inputView: {
-        backgroundColor: 'rgba(173, 200, 255, 1)',
+        backgroundColor: 'white',
         borderRadius: 30,
+        borderColor: '#6F9EEB',
+        borderWidth: 1,
         width: "70%",
         height: 45,
         marginBottom: 20,
@@ -108,7 +131,7 @@ const styles = StyleSheet.create({
         height: 50,
         flex: 1,
         padding: 10,
-        marginLeft: 20,
+        marginLeft: 10,
     },
     forgot_button: {
         height: 30,
@@ -120,8 +143,12 @@ const styles = StyleSheet.create({
         height: 50,
         alignItems: "center",
         justifyContent: "center",
-        marginTop: 40,
-        backgroundColor: "#90EE90",
+        marginTop: 10,
+        marginBottom: 10,
+        backgroundColor: "#6F9EEB",
+    },
+    loginText: {
+        color: 'white',
     },
     rectangle: {
         position: 'absolute',
