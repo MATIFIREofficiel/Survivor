@@ -1,7 +1,6 @@
 import { View, Text, Button, Image, FlatList , StyleSheet} from "react-native";
 import axios from "axios";
-import React, { useState, memo , useEffect} from 'react';
-
+import React, { useState, memo , useEffect, route} from 'react';
 
 function Item({ item, onPress }) {
     return (
@@ -27,7 +26,7 @@ function Item({ item, onPress }) {
 const ids = [];
 
 
-export default function TrombinoscopeScreen({ navigation }) {
+export default function TrombinoscopeScreen({ navigation}) {
     const [refreshing, setRefreshing] = useState(false);
 
     const [infos, setinfos] = useState([]);
@@ -55,14 +54,14 @@ export default function TrombinoscopeScreen({ navigation }) {
     };
     useEffect(() => {
         getListEmployeesID();
-      }, []);
+    }, []);
 
     const handleRefresh = () => {
         setRefreshing(true);
         console.log("refreshing");
         setRefreshing(false);
     };
- 
+
     const renderItem = ({ item }) => {
         return (
             <Item
