@@ -6,7 +6,6 @@ import Infos from '../Components/Infos';
 export default function ProfileDetailScreen({ navigation, route }) {
 
   const { access_token } = route.params[0];
-  // const id = route.params[1];
   console.log(`id = ${route.params[1]}`);
   const [infos, setinfos] = useState([]);
 
