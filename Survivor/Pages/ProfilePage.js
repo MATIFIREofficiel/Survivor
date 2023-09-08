@@ -28,9 +28,6 @@ export default function ProfilePage({ navigation, route }) {
     }
   };
 
-  // useEffect(() => {
-  //   getUserInfo();
-  // }, []);
   getUserInfo();
 
   return (
