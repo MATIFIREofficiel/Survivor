@@ -75,20 +75,6 @@ export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
                 />
               ),
             }} />
-        <Drawer.Screen name="Weather" component={WeatherWidget}
-
-
-          initialParams={apiUser}
-          options={
-            {
-              drawerIcon: ({ focused, size }) => (
-                <Ionicons
-                  name={focused ? "people" : "people-outline"}
-                  size={size}
-                  color={focused ? 'blue' : '#ccc'}
-                />
-              ),
-            }} />
         <Drawer.Screen name="Profile" component={ProfilePage}
           initialParams={[apiUser, 74]}
           options={
