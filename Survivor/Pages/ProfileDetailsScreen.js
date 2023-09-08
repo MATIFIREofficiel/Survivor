@@ -26,9 +26,6 @@ export default function ProfileDetailScreen({ navigation, route }) {
     }
   };
 
-  // useEffect(() => {
-  //   getUserInfo();
-  // }, []);
   getUserInfo();
 
   return (
