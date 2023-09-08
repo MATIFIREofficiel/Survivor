@@ -8,7 +8,8 @@ import ProfilePage from './ProfilePage.js';
 import DeveloppementScreen from './DeveloppementScreen.js';
 
 import { Ionicons } from '@expo/vector-icons';
-import { Button, View, StyleSheet, Text } from 'react-native';
+import { Button, View, StyleSheet } from 'react-native';
+import WeatherWidget from '../Components/WeatherWidget.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   },
 });
 
-function ProfileStack({route}) {
+function ProfileStack({ route }) {
   return (
     <Stack.Navigator initialRouteName="Trombinoscope">
       <Stack.Screen name="All members" component={TrombinoscopeScreen}
@@ -67,6 +68,7 @@ export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
             {
               drawerIcon: ({ focused, size }) => (
                 <Ionicons
+
                   name={focused ? "people" : "people-outline"}
                   size={size}
                   color={focused ? 'blue' : '#ccc'}

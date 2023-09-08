@@ -2,7 +2,8 @@ import { Text, View, StyleSheet, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Infos from '../Components/Infos';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
+import WeatherWidget from '../Components/WeatherWidget';
+
 
 export default function ProfilePage({ navigation, route }) {
 
@@ -31,6 +32,7 @@ export default function ProfilePage({ navigation, route }) {
   getUserInfo();
 
   return (
+    <>
       <View style={styles.container}>
         <Image
           source={{
@@ -45,6 +47,11 @@ export default function ProfilePage({ navigation, route }) {
           style={styles.image} />
         <Infos style={styles.infos} infos={infos} />
       </View>
+      <View style={{flex: 2 , flexDirection:'row' ,justifyContent: "flex-start", alignItems:"flex-start"}}>
+        <WeatherWidget style={styles.widget} city={"Nantes"} />
+        <WeatherWidget style={styles.widget} city={"paris"}/>
+      </View>
+    </>
   )
 }
 
@@ -55,7 +62,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   infos: {
-    padding : 10,
+    padding: 10,
   },
 
   image: {
@@ -67,4 +74,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000',
   },
+  widget: {
+    padding: 10,
+  }
 })
