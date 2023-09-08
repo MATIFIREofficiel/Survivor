@@ -5,22 +5,42 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProfileDetailScreen from './ProfileDetailsScreen.js';
 import TrombinoscopeScreen from './Trombinoscope.js';
 import ProfilePage from './ProfilePage.js';
+import DeveloppementScreen from './DeveloppementScreen.js';
 
 import { Ionicons } from '@expo/vector-icons';
-import { Button, View, StyleSheet } from 'react-native';
+import { Button, View, StyleSheet, Text } from 'react-native';
 
 const Drawer = createDrawerNavigator();
 
-function NotificationsScreen({ navigation }) {
+const Stack = createStackNavigator();
+
+function DisconnectionButton({ route })
+{
+  const { setIsSignedIn } = route.params || {};
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
+    <View style={styles.container}>
+      <Button
+        title="Log out"
+        type="clear"
+        titleStyle={{ color: '#6F9EEB' }}
+        onPress={() => { route.params.setIsSignedIn(false);
+        }}
+      />
     </View>
   );
 }
 
-
-const Stack = createStackNavigator();
+const styles = StyleSheet.create({
+  container: {
+    borderWidth: 2,
+    borderColor: 'blue',
+    borderRadius: 5,
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+  },
+});
 
 function ProfileStack({route}) {
   return (
@@ -37,8 +57,7 @@ function ProfileStack({route}) {
   );
 }
 
-
-export default function DrawerMenu({ navigation, apiUser }) {
+export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
   return (
     <NavigationContainer styles={style.container}>
       <Drawer.Navigator initialRouteName="trombinoscope">
@@ -49,17 +68,6 @@ export default function DrawerMenu({ navigation, apiUser }) {
               drawerIcon: ({ focused, size }) => (
                 <Ionicons
                   name={focused ? "people" : "people-outline"}
-                  size={size}
-                  color={focused ? 'blue' : '#ccc'}
-                />
-              ),
-            }} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen}
-          options={
-            {
-              drawerIcon: ({ focused, size }) => (
-                <Ionicons
-                  name="ios-notifications"
                   size={size}
                   color={focused ? 'blue' : '#ccc'}
                 />
@@ -77,6 +85,64 @@ export default function DrawerMenu({ navigation, apiUser }) {
                 />
               ),
             }} />
+        <Drawer.Screen name="Notifications" component={DeveloppementScreen}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="ios-notifications"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Widgets" component={DeveloppementScreen}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="grid"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Chat" component={DeveloppementScreen}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="chatbubbles"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Calendar" component={DeveloppementScreen}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="calendar"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen
+          name="Settings"
+          component={DisconnectionButton}
+          initialParams={{ setIsSignedIn: setIsSignedIn }}
+          options={{
+            drawerIcon: ({ focused, size }) => (
+              <Ionicons
+                name="settings"
+                size={size}
+                color={focused ? 'blue' : '#ccc'}
+              />
+            ),
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
