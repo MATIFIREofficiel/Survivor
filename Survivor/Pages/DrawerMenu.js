@@ -8,6 +8,7 @@ import ProfilePage from './ProfilePage.js';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Button, View, StyleSheet } from 'react-native';
+import WeatherWidget from '../Components/WeatherWidget.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -22,7 +23,7 @@ function NotificationsScreen({ navigation }) {
 
 const Stack = createStackNavigator();
 
-function ProfileStack({route}) {
+function ProfileStack({ route }) {
   return (
     <Stack.Navigator initialRouteName="Trombinoscope">
       <Stack.Screen name="All members" component={TrombinoscopeScreen}
@@ -43,6 +44,21 @@ export default function DrawerMenu({ navigation, apiUser }) {
     <NavigationContainer styles={style.container}>
       <Drawer.Navigator initialRouteName="trombinoscope">
         <Drawer.Screen name="Trombinoscope" component={ProfileStack}
+          initialParams={{city: "paris"}}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+
+                  name={focused ? "people" : "people-outline"}
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Weather" component={WeatherWidget}
+
+
           initialParams={apiUser}
           options={
             {
