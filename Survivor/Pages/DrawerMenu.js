@@ -5,20 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ProfileDetailScreen from './ProfileDetailsScreen.js';
 import TrombinoscopeScreen from './Trombinoscope.js';
 import ProfilePage from './ProfilePage.js';
+import DeveloppementScreen from './DeveloppementScreen.js';
 
 import { Ionicons } from '@expo/vector-icons';
-import { Button, View, StyleSheet } from 'react-native';
+import { Button, View, StyleSheet, Text } from 'react-native';
 
 const Drawer = createDrawerNavigator();
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
-
 
 const Stack = createStackNavigator();
 
@@ -37,7 +29,6 @@ function ProfileStack({route}) {
   );
 }
 
-
 export default function DrawerMenu({ navigation, apiUser }) {
   return (
     <NavigationContainer styles={style.container}>
@@ -54,7 +45,19 @@ export default function DrawerMenu({ navigation, apiUser }) {
                 />
               ),
             }} />
-        <Drawer.Screen name="Notifications" component={NotificationsScreen}
+        <Drawer.Screen name="Profile" component={ProfilePage}
+          initialParams={[apiUser, 74]}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="person"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Notifications" component={DeveloppementScreen}
           options={
             {
               drawerIcon: ({ focused, size }) => (
@@ -65,13 +68,34 @@ export default function DrawerMenu({ navigation, apiUser }) {
                 />
               ),
             }} />
-        <Drawer.Screen name="Profile" component={ProfilePage}
-          initialParams={[apiUser, 74]}
+        <Drawer.Screen name="Widgets" component={DeveloppementScreen}
           options={
             {
               drawerIcon: ({ focused, size }) => (
                 <Ionicons
-                  name="person"
+                  name="grid"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Calendar" component={DeveloppementScreen}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="chatbubbles"
+                  size={size}
+                  color={focused ? 'blue' : '#ccc'}
+                />
+              ),
+            }} />
+        <Drawer.Screen name="Chat" component={DeveloppementScreen}
+          options={
+            {
+              drawerIcon: ({ focused, size }) => (
+                <Ionicons
+                  name="calendar"
                   size={size}
                   color={focused ? 'blue' : '#ccc'}
                 />
