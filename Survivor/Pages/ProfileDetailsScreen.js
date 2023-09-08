@@ -2,13 +2,11 @@ import { Text, View, StyleSheet, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Infos from '../Components/Infos';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry';
 
-export default function ProfilePage({ navigation, route }) {
+export default function ProfileDetailScreen({ navigation, route }) {
 
   const { access_token } = route.params[0];
-  const id = route.params[1];
-  console.log(`id = ${id}`);
+  console.log(`id = ${route.params[1]}`);
   const [infos, setinfos] = useState([]);
 
   const getUserInfo = async () => {
