@@ -101,6 +101,19 @@ export default function DrawerMenu({ navigation, apiUser }) {
                 />
               ),
             }} />
+        <Drawer.Screen
+          name="Settings"
+          component={DeveloppementScreen}
+          options={{
+            drawerIcon: ({ focused, size }) => (
+              <Ionicons
+                name="settings"
+                size={size}
+                color={focused ? 'blue' : '#ccc'}
+              />
+            ),
+          }}
+        />
       </Drawer.Navigator>
     </NavigationContainer>
   );
