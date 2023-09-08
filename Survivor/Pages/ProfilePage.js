@@ -1,4 +1,4 @@
-import { Text, View, StyleSheet, Image, ScrollView } from 'react-native'
+import { Text, View, StyleSheet, Image } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Infos from '../Components/Infos';
@@ -47,10 +47,9 @@ export default function ProfilePage({ navigation, route }) {
           style={styles.image} />
         <Infos style={styles.infos} infos={infos} />
       </View>
-      <View style={{ flex: 2, justifyContent: "flex-start", alignItems: "flex-start" }}>
-        <ScrollView>
-          <WeatherWidget city={infos.city} />
-        </ScrollView>
+      <View style={{flex: 2 , flexDirection:'row' ,justifyContent: "flex-start", alignItems:"flex-start"}}>
+        <WeatherWidget style={styles.widget} city={"Nantes"} />
+        <WeatherWidget style={styles.widget} city={"paris"}/>
       </View>
     </>
   )
@@ -75,4 +74,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#000',
   },
+  widget: {
+    padding: 10,
+  }
 })

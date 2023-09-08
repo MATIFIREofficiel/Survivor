@@ -44,7 +44,6 @@ export default function DrawerMenu({ navigation, apiUser }) {
     <NavigationContainer styles={style.container}>
       <Drawer.Navigator initialRouteName="trombinoscope">
         <Drawer.Screen name="Trombinoscope" component={ProfileStack}
-          initialParams={{city: "paris"}}
           options={
             {
               drawerIcon: ({ focused, size }) => (
