@@ -107,7 +107,7 @@ export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
                 />
               ),
             }} />
-        <Drawer.Screen name="Calendar" component={DeveloppementScreen}
+        <Drawer.Screen name="Chat" component={DeveloppementScreen}
           options={
             {
               drawerIcon: ({ focused, size }) => (
@@ -118,7 +118,7 @@ export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
                 />
               ),
             }} />
-        <Drawer.Screen name="Chat" component={DeveloppementScreen}
+        <Drawer.Screen name="Calendar" component={DeveloppementScreen}
           options={
             {
               drawerIcon: ({ focused, size }) => (
