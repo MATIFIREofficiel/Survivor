@@ -6,9 +6,11 @@ import ProfileDetailScreen from './ProfileDetailsScreen.js';
 import TrombinoscopeScreen from './Trombinoscope.js';
 import ProfilePage from './ProfilePage.js';
 import DeveloppementScreen from './DeveloppementScreen.js';
+import WidgetPage from './WidgetPage.js';
 
 import { Ionicons } from '@expo/vector-icons';
 import { Button, View, StyleSheet } from 'react-native';
+import { useState } from 'react';
 import WeatherWidget from '../Components/WeatherWidget.js';
 
 const Drawer = createDrawerNavigator();
@@ -59,11 +61,13 @@ function ProfileStack({ route }) {
 }
 
 export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
+  const [userWidget, setUserWidget] = useState([])
+
   return (
     <NavigationContainer styles={style.container}>
       <Drawer.Navigator initialRouteName="trombinoscope">
         <Drawer.Screen name="Trombinoscope" component={ProfileStack}
-          initialParams={apiUser}
+          initialParams={[apiUser]}
           options={
             {
               drawerIcon: ({ focused, size }) => (
@@ -76,7 +80,7 @@ export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
               ),
             }} />
         <Drawer.Screen name="Profile" component={ProfilePage}
-          initialParams={[apiUser, 74]}
+          initialParams={[apiUser, 74, userWidget, setUserWidget]}
           options={
             {
               drawerIcon: ({ focused, size }) => (
@@ -98,7 +102,8 @@ export default function DrawerMenu({ navigation, apiUser, setIsSignedIn}) {
                 />
               ),
             }} />
-        <Drawer.Screen name="Widgets" component={DeveloppementScreen}
+        <Drawer.Screen name="Widgets" component={WidgetPage}
+          initialParams={[userWidget, setUserWidget]}
           options={
             {
               drawerIcon: ({ focused, size }) => (
