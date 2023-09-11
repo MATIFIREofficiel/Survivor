@@ -9,6 +9,9 @@ export default function ProfilePage({ navigation, route }) {
 
   const { access_token } = route.params[0];
   const id = route.params[1];
+  const [userWidgets, setUserWidgets] = useState(route.params[2]);
+  console.log(`userWidgets = ${userWidgets}`);
+
   console.log(`id = ${id}`);
   const [infos, setinfos] = useState([]);
 

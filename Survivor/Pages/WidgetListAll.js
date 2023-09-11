@@ -1,9 +1,9 @@
 import { Text, StyleSheet, View, FlatList, TouchableOpacity } from 'react-native'
 import React, { route, useState, useRef } from 'react'
-import WeatherWidget from './WeatherWidget';
+import WeatherWidget from '../Components/WeatherWidget';
 import { TextInput } from 'react-native-gesture-handler';
 
-export default function WidgetList(props) {
+export default function WidgetListAll(props) {
 
   const inputRef = useRef(null);
 
@@ -19,12 +19,14 @@ export default function WidgetList(props) {
     }
 
   const [isWeatherClicked, setisWeatherClicked] = useState(false);
-  const [userWidgets, setUserWidgets] = useState(props.userWidgets);
+  let userWidgets = props.userWidgets.current
+  console.log("WidgetList.js: userWidgets: ", userWidgets)
 
   const openKeyboard = (item) => {
 
     console.log("WidgetList.js: openKeyboard: item: ", item);
-    setUserWidgets([...userWidgets, item]);
+    userWidgets = [...userWidgets, item];
+    console.log("WidgetList.js: openKeyboard: userWidgets: ", userWidgets);
     if (item.name === "WeatherWidget") {
       setisWeatherClicked(true);
       if (inputRef.current) {
@@ -35,6 +37,7 @@ export default function WidgetList(props) {
 
 
   const [widgets, setWidgets] = useState(props.widgets);
+  console.log("WidgetList.js: widgets: ", widgets);
 
 
   function Item({ item, onPress }) {
